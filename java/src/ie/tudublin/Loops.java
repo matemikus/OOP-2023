@@ -2,52 +2,79 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Loops extends PApplet {
+public class Loops extends PApplet
+{
+	int animation = 0;
 
-	int mode = 0;
-
-	public void settings() {
-		size(1000, 1000);
-		//fullScreen(SPAN);
+	public void settings()
+	{
+		size(500, 500);
 	}
 
 	public void setup() {
-		colorMode(HSB);
+		background(0);	
 	}
-
-	public void keyPressed() {
-
-		mode = key - '0';
-		println(mode);
-	}
-
-	float off = 0;
-
-	public void draw() {
-		background(0);
-		fill(255);
-		noStroke();
-
-		switch (mode) {
-			case 0:
-				int numCircles = (int) max(1, mouseX / 50.0f);
-				float d = width / numCircles;
-				for (int j = 0; j < numCircles; j++) {
-					for (int i = 0; i < numCircles; i++) {
-						float x = (d * 0.5f) + (d * i);
-						float y = (d * 0.5f) + (d * j);
-						float c = ((i + j) / ((numCircles - 1) * 2.0f)) * 255.0f;
-						fill((c + off) % 256, 255, 255);
-						circle(x, y, d);
-					}
+	
+	public void draw()
+	{	
+		fill(0,0,255);
+		clear();
+		
+		if(animation == 0) {
+			if(mouseX >= 250) {
+			rect(250, 0, 250, 500);
+			} else {
+				rect(0, 0, 250, 500);
+			}
+		}
+		if(animation == 1 ) 
+		{
+			fill(0,0,255);
+			if(mouseX >= 250) 
+			{
+				if(mouseY >= 250)
+				{
+					rect(250, 250, 500, 500); // Bottom Right
+						
+				} else {
+					rect(250, 0, 250, 250);	// Top Right
 				}
-				off += (mouseY / 50.0f);
-				break;
-			case 1:
-				break;
-			default:
-				break;
+			}
+
+			if(mouseX <= 250) 
+			{
+				if(mouseY <= 250)
+				{
+					rect(0, 0, 250, 250);
+						
+				} else {
+					rect(0, 250, 250, 250);
+				}
+			}
+		}
+		
+		if(animation == 2) 
+		{
+			if(mouseX > 200 && mouseX < 300) 
+			{
+				if(mouseY > 200 && mouseY < 260){
+					fill(255,0,0);
+				}
+			}
+			rect(200, 200, 100, 60);	
 		}
 
+	}
+
+	public void keyPressed()
+	{
+		if (keyCode == LEFT)
+		{
+			if(animation == 2) {
+				animation = 0;
+			} else {
+				animation++;
+			}
+		}
 	}
 }
