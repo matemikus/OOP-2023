@@ -14,6 +14,8 @@ public class StarMap extends PApplet
 	{
 		size(500, 500);
 	}
+	
+
 
 	public void setup() {
 		colorMode(RGB);
@@ -41,7 +43,7 @@ public class StarMap extends PApplet
 		}
 	}
 
-	public void loadStars()
+	void loadStars()
 	{
 		Table table = loadTable("HabHYG15ly.csv", "header");
  		for(TableRow r:table.rows())
@@ -89,4 +91,35 @@ public class StarMap extends PApplet
 		drawGrid();
 		displayStars();
 	}
+
+float border = 50; 
+ArrayList<Star> Stars = new ArrayList<Star>(); 
+
+int selected1 = -1;
+int selected2 = -1;
+
+void mousePressed()
+{
+  for(int i = 0 ; i < stars.size() ; i ++)
+  {
+    Star star = stars.get(i);
+    
+    if (dist(mouseX, mouseY, star.screenPos.x, star.screenPos.y) < star.magnitude / 2)
+    {
+      if (selected1 == -1)
+      {
+        selected1 = i;
+      }
+      else if (selected2 == -1)
+      {
+        selected2 = i;
+      }
+      else
+      {
+        selected1 = i;
+        selected2 = -1;
+      }           
+    }
+  }  
+}
 }
