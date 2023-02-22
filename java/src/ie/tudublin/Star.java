@@ -97,5 +97,8 @@ public class Star {
                 + ", absMag=" + absMag + ", distance=" + distance + "]";
     }
 
+    public void render(StarMap starMap) {
+    }
+
 
 }
