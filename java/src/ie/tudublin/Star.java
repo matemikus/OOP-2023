@@ -1,5 +1,7 @@
 package ie.tudublin;
 
+import processing.data.TableRow;
+
 public class Star {
     private boolean hab;
     private String displayName;
@@ -17,6 +19,20 @@ public class Star {
         this.zG = zG;
         this.absMag = absMag;
         this.distance = distance;
+    }
+
+    public Star(TableRow row)
+    {
+        // Construction Chaining
+        this(row.getInt("Hab?") == 1,
+            row.getString("Display Name"),
+            row.getFloat("Xg"),
+            row.getFloat("Yg"),
+            row.getFloat("Zg"),
+            row.getFloat("AbsMag"),
+            row.getFloat("Distance")
+        );
+
     }
 
     public boolean isHab() {
@@ -80,5 +96,6 @@ public class Star {
         return "Star [hab=" + hab + ", displayName=" + displayName + ", xG=" + xG + ", yG=" + yG + ", zG=" + zG
                 + ", absMag=" + absMag + ", distance=" + distance + "]";
     }
+
 
 }
