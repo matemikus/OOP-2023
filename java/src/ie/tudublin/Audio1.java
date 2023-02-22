@@ -31,6 +31,12 @@ public class Audio1 extends PApplet
                 ap.play();
             }
         }
+        if (keyCode == '0') {
+
+        }
+        if (keyCode == '1') {
+            
+        }
 	}
 
     public void settings()
