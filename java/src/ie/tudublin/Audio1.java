@@ -38,6 +38,9 @@ public class Audio1 extends PApplet
 
         }
         if (keyCode == '2') {
+
+        }
+        if (keyCode == '3') {
             
         }
 	}
