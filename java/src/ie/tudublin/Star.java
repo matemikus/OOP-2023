@@ -75,4 +75,10 @@ public class Star {
         this.distance = distance;
     }
 
+    @Override
+    public String toString() {
+        return "Star [hab=" + hab + ", displayName=" + displayName + ", xG=" + xG + ", yG=" + yG + ", zG=" + zG
+                + ", absMag=" + absMag + ", distance=" + distance + "]";
+    }
+
 }
