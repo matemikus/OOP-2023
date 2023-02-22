@@ -44,6 +44,9 @@ public class Audio1 extends PApplet
 
         }
         if (keyCode == '4') {
+
+        }
+        if (keyCode == '5') {
             
         }
 	}
