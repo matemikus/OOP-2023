@@ -47,4 +47,32 @@ public class Star {
         return distance;
     }
 
+    public void setHab(boolean hab) {
+        this.hab = hab;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setxG(float xG) {
+        this.xG = xG;
+    }
+
+    public void setyG(float yG) {
+        this.yG = yG;
+    }
+
+    public void setzG(float zG) {
+        this.zG = zG;
+    }
+
+    public void setAbsMag(float absMag) {
+        this.absMag = absMag;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
 }
