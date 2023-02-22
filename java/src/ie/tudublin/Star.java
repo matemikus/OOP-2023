@@ -48,6 +48,7 @@ public class Star {
         p.circle(x,y,absMag);
         p.fill(255);
         p.textAlign(PApplet.LEFT, PApplet.CENTER);
+        p.textSize(12);
         p.text(displayName, x + 50, y);
         p.noFill();
     }
