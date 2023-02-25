@@ -18,6 +18,7 @@ public class Audio1 extends PApplet
     float y = 0;
     float smoothedY = 0;
     float smoothedAmplitude = 0;
+    int draw = -1;
 
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
@@ -32,10 +33,10 @@ public class Audio1 extends PApplet
             }
         }
         if (keyCode == '0') {
-
+            draw = 0;
         }
         if (keyCode == '1') {
-
+            draw = 1;
         }
         if (keyCode == '2') {
 
@@ -47,7 +48,10 @@ public class Audio1 extends PApplet
 
         }
         if (keyCode == '5') {
-            
+
+        }
+        if (keyCode > '5') {
+            draw = -1;
         }
 	}
 
@@ -72,7 +76,6 @@ public class Audio1 extends PApplet
 
         y = height / 2;
         smoothedY = y;
-
     }
 
 	public void draw()
@@ -82,12 +85,23 @@ public class Audio1 extends PApplet
 
         float half = height / 2;
         float cgap = 255 / (float)ab.size();
-        for(int i = 0 ; i < ab.size() ; i ++)
-        {
-            stroke(cgap * i, 255, 255);
-            line(i, half, i , half + ab.get(i) * half); 
+
+        if( draw == -1 ) {
+            for(int i = 0 ; i < ab.size() ; i ++)
+            {
+                stroke(cgap * i, 255, 255);
+                line(i, half, i , half + ab.get(i) * half);
+                //line(i, half, half + ab.get(i) * half, i);
+            }
         }
 
-        
+        if( draw == 0 ) {
+            for(int i = 0 ; i < ab.size() ; i ++)
+            {
+                stroke(cgap * i, 255, 255);
+                //line(i, half, i , half + ab.get(i) * half);
+                line(i, half, half + ab.get(i) * half, i);
+            }
+        }
 	}
 }
