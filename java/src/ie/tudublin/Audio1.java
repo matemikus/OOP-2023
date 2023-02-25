@@ -32,6 +32,7 @@ public class Audio1 extends PApplet
                 ap.play();
             }
         }
+        
         if (keyCode == '0') {
             draw = 0;
         }
@@ -39,7 +40,7 @@ public class Audio1 extends PApplet
             draw = 1;
         }
         if (keyCode == '2') {
-
+            draw = 2;
         }
         if (keyCode == '3') {
 
@@ -86,12 +87,11 @@ public class Audio1 extends PApplet
         float half = height / 2;
         float cgap = 255 / (float)ab.size();
 
-        if( draw == -1 ) {
+        if( draw == -1 || draw == 1 ) {
             for(int i = 0 ; i < ab.size() ; i ++)
             {
                 stroke(cgap * i, 255, 255);
-                line(i, half, i , half + ab.get(i) * half);
-                //line(i, half, half + ab.get(i) * half, i);
+                line(i, half, i , half + ab.get(i) * half); // original line
             }
         }
 
@@ -99,8 +99,22 @@ public class Audio1 extends PApplet
             for(int i = 0 ; i < ab.size() ; i ++)
             {
                 stroke(cgap * i, 255, 255);
-                //line(i, half, i , half + ab.get(i) * half);
                 line(i, half, half + ab.get(i) * half, i);
+            }
+        }
+
+        if( draw == 2 ) {
+            for(int i = 0 ; i < ab.size() ; i ++)
+            {
+                stroke(cgap * i, 255, 255);
+                // Top Line
+                line(i, 0, i , ab.get(i) * half);
+                //Bottom Line
+                line(i, 1000, i , 1000 + ab.get(i) * half);
+                // Left Line
+                line(0, i, ab.get(i) * half, i );
+                // Right Line
+                line(1024, i, 1024 + ab.get(i) * half, i );
             }
         }
 	}
