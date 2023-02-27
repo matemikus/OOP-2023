@@ -43,13 +43,13 @@ public class Audio1 extends PApplet
             draw = 2;
         }
         if (keyCode == '3') {
-
+            draw = 3;
         }
         if (keyCode == '4') {
-
+            draw = 4;
         }
         if (keyCode == '5') {
-
+            draw = 5;
         }
         if (keyCode > '5') {
             draw = -1;
@@ -115,6 +115,14 @@ public class Audio1 extends PApplet
                 line(0, i, ab.get(i) * half, i );
                 // Right Line
                 line(1024, i, 1024 + ab.get(i) * half, i );
+            }
+        }
+
+        if( draw == 3 ) {
+            for(int i = 0 ; i < ab.size() ; i ++)
+            {
+                stroke(255,191,0);
+                circle(width/2, height/2, ab.get(i) * half );
             }
         }
 	}
