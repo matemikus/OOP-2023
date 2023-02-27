@@ -119,11 +119,43 @@ public class Audio1 extends PApplet
         }
 
         if( draw == 3 ) {
+            float total = 300;
+            
             for(int i = 0 ; i < ab.size() ; i ++)
             {
-                stroke(255,191,0);
-                circle(width/2, height/2, ab.get(i) * half );
+                total += abs(ab.get(i)); // abs = absolute value of
+                strokeWeight(6);
             }
+            
+            float average = total / (float) ab.size();
+            float r = average * 300;
+            lerpedR = lerp(lerpedR, r, 0.2f);
+
+            fill(204, 102, 0);
+            circle(height/2,width/2,r);
+            fill(255,164,0);
+
+            //lerp (10, 20, 0); // lerp stands for linear interperation
+
+            
         }
+
+        if( draw == 4 ) {
+            
+            float total = 300;
+
+            for(int i = 0 ; i < ab.size() ; i ++)
+            {
+               total += abs(ab.get(i)); 
+               float upperLeftx = ((width/2-40) + total);
+               float upperLefty = ((height/2-40 + total));
+            }
+            float average = total / (float) ab.size();
+            float r = average * 200;
+
+        }
+
+        
 	}
+    float lerpedR = 0;
 }
