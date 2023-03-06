@@ -1,5 +1,7 @@
 package ie.tudublin;
 
+import java.util.ArrayList;
+
 import ddf.minim.AudioBuffer;
 // import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
@@ -16,7 +18,7 @@ public class Audio3 extends PApplet{
     AudioBuffer ab;
 
     FFT fft;
-
+    ArrayList<Cube> cubes = new ArrayList<Cube>();
 
     public void keyPressed()
     {
@@ -26,14 +28,22 @@ public class Audio3 extends PApplet{
             {
                 ap.pause();
             }
-            else {
+            else
+            {
                 ap.play();
             }
+        
+        }
+        if (key >= '0' && key <= '9')
+        {
+            createCubes(key - '0');
         }
     }
+
     public void settings()
     {
-        size(1024, 1024, P3D);
+        fullScreen(P3D, SPAN);
+        // size(1024, 1024, P3D);
     }
 
     public void setup()
@@ -42,42 +52,62 @@ public class Audio3 extends PApplet{
         ap = m.loadFile("tomp3.cc - 08 PsychNerD and Marco G  More Cowbell.mp3", 1024);
         // i = m.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ap.mix;
-        ap.play
+
         lerpedBuffer = new float[width];
 
-        fft = new FFT(width, 44100);
+        // fft = new FFT(width, 44100);
+
+        createCubes(2);
+
     }
+
+    public void createCubes(int numCubes)
+    {
+        cubes.clear();
+        float theta = TWO_PI / (float) numCubes;
+        for(int i = 0; i < numCubes ; i ++)
+        {
+            float x = (width / 2) + sin(i * theta) * 300;
+            float y = (height / 2) - cos(i * theta) * 300;
+            Cube c = new Cube();
+            c.x = x;
+            c.y = y;
+            cubes.add(c);
+        } 
+    }
+
+    float[] lerpedBuffer;
 
     float rot = 0;
     float lerpedAverage = 0;
 
-    float[] lerpedBuffer;
     public void draw()
     {
+
         float total = 0;
-        for (int i = 0; i < ab.size(); i++)
+        for (int i = 0 ; i < ab.size() ; i ++)
         {
             total += abs(ab.get(i));
         }
         float average = total / (float) ab.size();
 
-        lerpedAverage = lerpedAverage
+        lerpedAverage = lerp(lerpedAverage, average, 0.1f);
         background(0);
         lights();
         colorMode(HSB);
-        stroke(255);
-        strokeWeight(5);
+        
+        float c = map(lerpedAverage, 0, 0.5f, 0, 255);        
+        rot += map(lerpedAverage, 0, 1.0f, 0, 0.2f);
+        float boxSize = map(lerpedAverage, 0, 0.5f, 100, 500);
 
-        noFill(); // makes it a wireframe
-        translate(width / 2, height /2);
-        rotateY(rot);
-        rotateX(rot);
-
-        float boxSize = max(100, map(lerpedAverage, 0 , 1, 100, 500))
-
-        box(200);
-        rot += 0.01f;
-
+        for(int i = 0; i < cubes.size() ; i ++)
+        {
+            Cube cube = cubes.get(i);
+            cube.c = c;
+            cube.rot = rot;
+            cube.size = boxSize;
+            cube.render(this);
+        }        
     }
 
     float lerpedY = 0;
