@@ -108,7 +108,7 @@ public class LifeBoard {
     {
         for(int row = 0 ; row < size ; row ++)
         {
-            p.stroke(255);
+            p.stroke(50);
             for (int col = 0 ; col < size ; col ++)
             {
                 float x = col * cellWidth;
@@ -116,13 +116,13 @@ public class LifeBoard {
 
                 if (board[row][col])
                 {
-                    p.fill(0, 255, 0);
+                    p.fill(255, 0, 0);
                 }
                 else
                 {
                     p.noFill();
                 }
-                p.rect(x, y, cellWidth, cellWidth);
+                p.circle(x, y, 5);
             }
         }
     }
@@ -135,5 +135,16 @@ public class LifeBoard {
     public void setSize(int size) {
         this.size = size;
     } 
+
+    public void keyPressed() {
+        if (p.keyCode != ' '){
+            applyRules();
+        }
+
+        if (p.key == '1') {
+            
+        }
+
+    }
     
 }
