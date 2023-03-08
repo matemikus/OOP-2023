@@ -122,7 +122,7 @@ public class LifeBoard {
                 {
                     p.noFill();
                 }
-                p.circle(x, y, 5); //h
+                p.circle(x, y, 5); //hh
             }
         }
     }
